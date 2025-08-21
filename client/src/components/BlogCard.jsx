@@ -19,8 +19,8 @@ const BlogCard = ({ trip, onTagClick }) => {
   if (!trip) return null;
 
   return (
-    <div className="trip-card my-5">
-      <div className="flex flex-row justify-center mx-15 my-10">
+    <div className="trip-card w-full max-w-4xl flex flex-col ">
+      <div className="flex flex-row justify-center mx-15 my-5">
 
         {/* Main Image */}
         {trip.photos[0] && (

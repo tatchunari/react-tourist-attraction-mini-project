@@ -55,6 +55,7 @@ const SearchTripPage = () => {
           />
         </div>
       </div>
+      <div className="flex flex-col gap-6 items-center">
       {tripsData.length > 0 && (
          <div className="my-10 mx-10">
         {tripsData.map((trip) => (
@@ -62,6 +63,7 @@ const SearchTripPage = () => {
         ))}
       </div>
       )}
+      </div>
     </div>
   );
 };
