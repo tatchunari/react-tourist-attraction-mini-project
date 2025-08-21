@@ -1,7 +1,21 @@
 import { FaLink } from "react-icons/fa";
+import { useState } from "react";
 
 
 const BlogCard = ({ trip, onTagClick }) => {
+
+  const [copied, setCopied] = useState(false);
+  
+   const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(trip.url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy!", err);
+    }
+  };
+
   if (!trip) return null;
 
   return (
@@ -54,10 +68,15 @@ const BlogCard = ({ trip, onTagClick }) => {
                 className="w-15 h-15 object-cover rounded-lg"
               />
             ))}
+            {/* Copy to Clipboard Button */}
           </div>
-            <a href={trip.url}>
-            <FaLink className="h-5 w-5 mt-10 text-blue-500 hover:text-blue-800"/>
-            </a>
+            <FaLink className="h-5 w-5 mt-10 text-blue-500 hover:text-blue-800 cursor-pointer" onClick={handleCopyLink}/>
+            {/* Copied Notification */}
+            {copied && (
+            <div className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1 rounded shadow-md animate-fadeInOut">
+              Copied to Clipboard!
+            </div>
+            )}
             </div>
         </div>
       </div>
