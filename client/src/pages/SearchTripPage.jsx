@@ -8,6 +8,7 @@ const SearchTripPage = () => {
   const [searchText, setSearchText] = useState("");
 
     
+  // Fetch Trips Data with Debouncing
   useEffect(() => {
     const debouncedFetch = debounce(async (keywords) => {
       try {
@@ -17,15 +18,25 @@ const SearchTripPage = () => {
         console.error(error);
       }
     }, 300); 
-    
+
     debouncedFetch(searchText);
 
     return () => debouncedFetch.cancel();
   }, [searchText]);
 
 
+  // For when user types in input
     const handleChange = (e) => {
       setSearchText(e.target.value);
+    }
+
+    // When user clicks the tag
+    const handleTagClick = (tag) => {
+      const tagsArray = searchText.split(" ").filter(Boolean);
+      if (!tagsArray.includes(tag)) {
+        const newSearch = tagsArray.length > 0 ? `${searchText} ${tag}` : tag;
+        setSearchText(newSearch);
+    }
     }
 
   return (
@@ -47,7 +58,7 @@ const SearchTripPage = () => {
       {tripsData.length > 0 && (
          <div className="my-10 mx-10">
         {tripsData.map((trip) => (
-          <BlogCard key={trip.eid} trip={trip} />
+          <BlogCard key={trip.eid} trip={trip} onTagClick={handleTagClick} />
         ))}
       </div>
       )}

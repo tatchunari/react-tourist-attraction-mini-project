@@ -1,7 +1,7 @@
 import { FaLink } from "react-icons/fa";
 
 
-const BlogCard = ({ trip }) => {
+const BlogCard = ({ trip, onTagClick }) => {
   if (!trip) return null;
 
   return (
@@ -34,7 +34,12 @@ const BlogCard = ({ trip }) => {
           <div className="flex flex-row gap-2 mt-1">
             <p className="font-prompt text-[12px]">หมวด</p>
             {trip.tags?.map((tag, index) => (
-              <p key={index} className="font-prompt text-[12px] underline">{tag}</p>
+              <p 
+              key={index} 
+              className="font-prompt text-[12px] underline text-gray-500 hover:text-black cursor-pointer"
+              onClick={() => onTagClick(tag)}
+              >{tag}
+              </p>
             ))}
           </div>
 
