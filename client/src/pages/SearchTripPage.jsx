@@ -1,22 +1,28 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import debounce from "lodash/debounce";
 import BlogCard from "../components/BlogCard";
 
 const SearchTripPage = () => {
   const [tripsData, setTripsData] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-    useEffect(() => {
-      const fetchTripsData = async () => {
-        try {
-          const res = await axios.get(`http://localhost:4001/trips?keywords=${searchText}`);
-          setTripsData(res.data.data);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      fetchTripsData();
-    }, [searchText]);
+    
+  useEffect(() => {
+    const debouncedFetch = debounce(async (keywords) => {
+      try {
+        const res = await axios.get(`http://localhost:4001/trips?keywords=${keywords}`);
+        setTripsData(res.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }, 300); 
+    
+    debouncedFetch(searchText);
+
+    return () => debouncedFetch.cancel();
+  }, [searchText]);
+
 
     const handleChange = (e) => {
       setSearchText(e.target.value);
