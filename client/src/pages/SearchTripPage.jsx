@@ -9,7 +9,7 @@ const SearchTripPage = () => {
     useEffect(() => {
       const fetchTripsData = async () => {
         try {
-          const res = await axios.get("http://localhost:4001/trips?keywords=");
+          const res = await axios.get(`http://localhost:4001/trips?keywords=${searchText}`);
           setTripsData(res.data.data);
         } catch (error) {
           console.error(error);
