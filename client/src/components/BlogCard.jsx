@@ -41,10 +41,10 @@ const BlogCard = () => {
           <p className="line-clamp-1 font-prompt text-[12px]">{trip.description}</p>
           <a href={trip.url} className="font-prompt text-blue-600 underline text-[12px]">อ่านต่อ</a>
           {/* Tags */}
-          <div className="flex flex-row gap-2 underline">
+          <div className="flex flex-row gap-2 ">
           <p className="font-prompt text-[12px]">หมวด</p>
           {trip.tags.map((tag, index) => (
-            <p key={index} className="font-prompt text-[12px]">{tag}</p>
+            <p key={index} className="font-prompt text-[12px] underline">{tag}</p>
           ))}
           </div>
           <div className="flex gap-5 mt-2">
