@@ -36,9 +36,11 @@ const BlogCard = ({ trip, onTagClick }) => {
           <a href={trip.url}>
           <h2 className="font-semibold font-prompt hover:text-blue-500 hover:underline">{trip.title}</h2>
           </a>
-          <p className="line-clamp-1 font-prompt text-[12px]">{trip.description}</p>
+          <p className="font-prompt text-[12px]">{trip.description.slice(0, 100)}...</p>
           <a
             href={trip.url}
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-prompt text-blue-600 hover:text-blue-800 underline text-[12px]"
           >
             อ่านต่อ
